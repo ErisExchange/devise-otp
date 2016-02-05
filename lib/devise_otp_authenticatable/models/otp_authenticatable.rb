@@ -7,7 +7,13 @@ module Devise::Models
     included do
       before_validation :generate_otp_auth_secret, :on => :create
       before_validation :generate_otp_persistence_seed, :on => :create
-      scope :with_valid_otp_challenge, lambda { |time| where('otp_challenge_expires > ?', time) }
+      scope(:with_valid_otp_challenge, lambda do |time|
+        if defined?(::Mongoid)
+          where(:otp_challenge_expires.gt => time)
+        else # Assume active_record
+          where('otp_challenge_expires > ?', time)
+        end
+      end)
     end
 
     module ClassMethods
