@@ -14,6 +14,23 @@ module Devise::Models
           where('otp_challenge_expires > ?', time)
         end
       end)
+
+
+      # A quick and dirty way of setting the filed for mongoid docs
+      # TODO commonize with active record and make use of Devise #apply_devise_schema
+      if defined?(::Mongoid)
+        field :otp_auth_secret, :type => String
+        field :otp_recovery_secret, :type => String
+        field :otp_enabled, :type => Boolean, :default => false, :null => false
+        field :otp_mandatory, :type => Boolean, :default => false, :null => false
+        field :otp_enabled_on, :type => Datetime
+        field :otp_failed_attempts, :type => Integer, :default => 0, :null => false
+        field :otp_recovery_counter, :type => Integer, :default => 0, :null => false
+        field :otp_persistence_seed, :type => String
+
+        field :otp_session_challenge, :type => String
+        field :otp_challenge_expires, :type => DateTime
+      end
     end
 
     module ClassMethods
