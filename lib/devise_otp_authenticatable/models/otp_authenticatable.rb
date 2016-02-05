@@ -74,7 +74,7 @@ module Devise::Models
 
     def generate_otp_challenge!(expires = nil)
       update_attributes!(:otp_session_challenge => SecureRandom.hex,
-             :otp_challenge_expires => DateTime.now + (expires || self.class.otp_authentication_timeout))
+             :otp_challenge_expires => Time.now + (expires || self.class.otp_authentication_timeout))
       otp_session_challenge
     end
 
