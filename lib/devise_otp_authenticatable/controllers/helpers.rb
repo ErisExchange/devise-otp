@@ -163,6 +163,11 @@ module DeviseOtpAuthenticatable
         image_tag(url, :alt => 'OTP Url QRCode')
       end
 
+      ### Back Ported methods ###
+      def auth_options
+        { scope: resource_name, recall: "#{controller_path}#new" }
+      end
+
     end
   end
 end
