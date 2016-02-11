@@ -23,7 +23,7 @@ module Devise::Models
         field :otp_recovery_secret, :type => String
         field :otp_enabled, :type => Boolean, :default => false, :null => false
         field :otp_mandatory, :type => Boolean, :default => false, :null => false
-        field :otp_enabled_on, :type => Datetime
+        field :otp_enabled_on, :type => DateTime
         field :otp_failed_attempts, :type => Integer, :default => 0, :null => false
         field :otp_recovery_counter, :type => Integer, :default => 0, :null => false
         field :otp_persistence_seed, :type => String
