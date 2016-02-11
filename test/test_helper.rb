@@ -5,6 +5,8 @@ $:.unshift File.dirname(__FILE__)
 puts "\n==> Devise.orm = #{DEVISE_ORM.inspect}"
 require "dummy/config/environment"
 require "orm/#{DEVISE_ORM}"
+require "minitest/autorun"
+require 'rails'
 require 'rails/test_help'
 require 'capybara/rails'
 require 'minitest/reporters'

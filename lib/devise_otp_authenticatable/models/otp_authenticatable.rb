@@ -7,7 +7,30 @@ module Devise::Models
     included do
       before_validation :generate_otp_auth_secret, :on => :create
       before_validation :generate_otp_persistence_seed, :on => :create
-      scope :with_valid_otp_challenge, lambda { |time| where('otp_challenge_expires > ?', time) }
+      scope(:with_valid_otp_challenge, lambda do |time|
+        if defined?(::Mongoid)
+          where(:otp_challenge_expires.gt => time)
+        else # Assume active_record
+          where('otp_challenge_expires > ?', time)
+        end
+      end)
+
+
+      # A quick and dirty way of setting the filed for mongoid docs
+      # TODO commonize with active record and make use of Devise #apply_devise_schema
+      if defined?(::Mongoid)
+        field :otp_auth_secret, :type => String
+        field :otp_recovery_secret, :type => String
+        field :otp_enabled, :type => Boolean, :default => false, :null => false
+        field :otp_mandatory, :type => Boolean, :default => false, :null => false
+        field :otp_enabled_on, :type => DateTime
+        field :otp_failed_attempts, :type => Integer, :default => 0, :null => false
+        field :otp_recovery_counter, :type => Integer, :default => 0, :null => false
+        field :otp_persistence_seed, :type => String
+
+        field :otp_session_challenge, :type => String
+        field :otp_challenge_expires, :type => DateTime
+      end
     end
 
     module ClassMethods
@@ -74,7 +97,7 @@ module Devise::Models
 
     def generate_otp_challenge!(expires = nil)
       update_attributes!(:otp_session_challenge => SecureRandom.hex,
-             :otp_challenge_expires => DateTime.now + (expires || self.class.otp_authentication_timeout))
+             :otp_challenge_expires => Time.now + (expires || self.class.otp_authentication_timeout))
       otp_session_challenge
     end
 

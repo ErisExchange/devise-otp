@@ -14,7 +14,7 @@ group :test do
     gem "sqlite3"
   end
 
-  gem "rails", "~> 4.0.0"
+  gem "rails", "3.1.11"
 
   gem "capybara"
   gem 'shoulda'

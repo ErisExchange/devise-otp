@@ -2,7 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
-  config.secret_key = '638da6a325f1de9038321504c4a06ef7f4f7f835331a63ba41b93732b3830d032b6a10b38afa67427e050b19f9717b1e7a45f650ac5631c53cc9dd85264fdfb0'
+  #config.secret_key = '638da6a325f1de9038321504c4a06ef7f4f7f835331a63ba41b93732b3830d032b6a10b38afa67427e050b19f9717b1e7a45f650ac5631c53cc9dd85264fdfb0'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -73,7 +73,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing :skip => :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  #config.skip_session_storage = [:http_auth]
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
@@ -107,7 +107,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed new email is stored in
   # unconfirmed email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  #config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
