@@ -1,4 +1,5 @@
-class DeviseOtp::CredentialsController < DeviseController
+class DeviseOtp::CredentialsController < ApplicationController
+  include Devise::Controllers::InternalHelpers
   helper_method :new_session_path
 
   prepend_before_filter :authenticate_scope!, :only => [:get_refresh, :set_refresh]

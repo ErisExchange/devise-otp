@@ -1,4 +1,5 @@
-class DeviseOtp::TokensController < DeviseController
+class DeviseOtp::TokensController < ApplicationController
+  include Devise::Controllers::InternalHelpers
   include Devise::Controllers::Helpers
 
   prepend_before_filter :ensure_credentials_refresh
