@@ -58,6 +58,12 @@ module Devise
   mattr_accessor :otp_issuer
   @@otp_issuer = Rails.application.class.parent_name
 
+  #
+  # The time after an otp is provisioned that it is able to be viewed
+  #
+  mattr_accessor :otp_shared_secret_view_window
+  @@otp_shared_secret_view_window = nil # disabled
+
   module Otp
 
   end

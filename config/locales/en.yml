@@ -29,6 +29,7 @@ en:
         title: 'Your token secret'
         explain: 'Take a photo of this QR code with your mobile'
         manual_provisioning: 'Manual provisioning code'
+        shared_secrete_not_visible: 'Your shared secrete is no longer visable, please reset your two-factor authentication to view again'
         reset_otp: 'Reset your Two Factors Authentication status'
         reset_explain: 'This will reset your credentials, and disable two-factors authentication.'
         reset_explain_warn: 'You will need to enroll your mobile device again.'
