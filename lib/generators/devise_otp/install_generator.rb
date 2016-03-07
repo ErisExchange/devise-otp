@@ -40,6 +40,10 @@ content = <<-CONTENT
   # url. Display will vary based on token application. (defaults to the Rails application class)
   #config.otp_issuer = 'my_application'
 
+  # The time after an otp is provisioned that it is able to be viewed
+  # 10.minutes => 10 minutes after otp is provisioined.
+  # config.otp_shared_secret_view_window = nil
+
 CONTENT
 
         inject_into_file "config/initializers/devise.rb", content, :before => /end[ |\n|]+\Z/

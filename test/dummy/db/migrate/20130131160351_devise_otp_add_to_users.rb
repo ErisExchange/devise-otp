@@ -6,7 +6,7 @@ class DeviseOtpAddToUsers < ActiveRecord::Migration
       t.boolean   :otp_enabled,          :default => false, :null => false
       t.boolean   :otp_mandatory,        :default => false, :null => false
       t.datetime  :otp_enabled_on
-      t.integer   :otp_time_drift,       :default => 0, :null => false
+      t.datetime  :otp_provisioned_on
       t.integer   :otp_failed_attempts,  :default => 0, :null => false
       t.integer   :otp_recovery_counter, :default => 0, :null => false
       t.string    :otp_persistence_seed
@@ -22,7 +22,7 @@ class DeviseOtpAddToUsers < ActiveRecord::Migration
   def self.down
     change_table :users do |t|
       t.remove :otp_auth_secret, :otp_recovery_secret, :otp_enabled, :otp_mandatory, :otp_enabled_on, :otp_session_challenge,
-          :otp_challenge_expires, :otp_time_drift, :otp_failed_attempts, :otp_recovery_counter, :otp_persistence_seed
+          :otp_challenge_expires, :otp_failed_attempts, :otp_recovery_counter, :otp_persistence_seed, :otp_provisioned_on
     end
   end
 end

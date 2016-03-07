@@ -24,6 +24,7 @@ module Devise::Models
         field :otp_enabled, :type => Boolean, :default => false, :null => false
         field :otp_mandatory, :type => Boolean, :default => false, :null => false
         field :otp_enabled_on, :type => DateTime
+        field :otp_provisioned_on, :type => DateTime
         field :otp_failed_attempts, :type => Integer, :default => 0, :null => false
         field :otp_recovery_counter, :type => Integer, :default => 0, :null => false
         field :otp_persistence_seed, :type => String
@@ -35,7 +36,8 @@ module Devise::Models
 
     module ClassMethods
       ::Devise::Models.config(self, :otp_authentication_timeout, :otp_drift_window, :otp_trust_persistence,
-                                    :otp_mandatory, :otp_credentials_refresh, :otp_issuer, :otp_recovery_tokens)
+                                    :otp_mandatory, :otp_credentials_refresh, :otp_issuer, :otp_recovery_tokens,
+                                    :otp_shared_secret_view_window)
 
       def find_valid_otp_challenge(challenge)
         with_valid_otp_challenge(Time.now).where(:otp_session_challenge => challenge).first
@@ -152,6 +154,7 @@ module Devise::Models
     end
 
     def generate_otp_auth_secret
+      self.otp_provisioned_on = Time.now
       self.otp_auth_secret = ROTP::Base32.random_base32
       self.otp_recovery_secret = ROTP::Base32.random_base32
     end

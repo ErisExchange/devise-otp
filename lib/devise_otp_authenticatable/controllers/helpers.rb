@@ -26,6 +26,15 @@ module DeviseOtpAuthenticatable
 
       end
 
+      def shared_secrete_visible?
+        return true if !hide_shared_secrete_enabled?
+        return false if !resource.otp_provisioned_on # For backward compatibility before otp_provisioned_on started getting set, otp_provisioned_on == nil => shared_secrete not visible
+        (resource.otp_provisioned_on + resource_class.otp_shared_secret_view_window) > Time.now
+      end
+
+      def hide_shared_secrete_enabled?
+        resource_class.otp_shared_secret_view_window && (resource_class.otp_shared_secret_view_window > 0)
+      end
 
       def trusted_devices_enabled?
         resource_class.otp_trust_persistence && (resource_class.otp_trust_persistence > 0)
