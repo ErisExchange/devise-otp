@@ -40,6 +40,10 @@ module Devise::Models
       def find_valid_otp_challenge(challenge)
         with_valid_otp_challenge(Time.now).where(:otp_session_challenge => challenge).first
       end
+
+      def otp_trust_persistence_days
+        self.otp_trust_persistence / 1.day
+      end
     end
 
     def time_based_otp

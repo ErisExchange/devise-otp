@@ -119,4 +119,9 @@ class OtpAuthenticatableTest < ActiveSupport::TestCase
     assert u.valid_otp_recovery_token? recovery.fetch(2)
   end
 
+  test 'otp_trust_persistence_days should return the correct number of day' do
+    resource = User
+    assert_equal 30.days, User.otp_trust_persistence # the default
+    assert_equal 30, User.otp_trust_persistence_days
+  end
 end
