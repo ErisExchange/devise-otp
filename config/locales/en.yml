@@ -9,7 +9,7 @@ en:
         recovery_prompt: 'Please enter your recovery code:'
         submit: 'Submit Token'
         recovery_link: "I don't have my device, I want to use a recovery code"
-        trust_device: "Trust this device"
+        trust_device: "Trust this device. Don't ask again (on this browser) for %{days} days."
 
       credentials:
         token_invalid: 'The token you provided was invalid.'
@@ -59,7 +59,7 @@ en:
 
       trusted_devices:
         title: 'Trusted Browsers'
-        explain: 'If you set your browser as trusted, you will not be asked to perform a 2-factors authentication when logging in from that browser, for a time of one month.'
+        explain: 'If you set your browser as trusted, you will not be asked to perform a 2-factors authentication when logging in from that browser, for a time of %{days} days.'
         device_trusted: 'Your browser is trusted.'
         device_not_trusted: 'Your browser is not trusted.'
         trust_remove: 'Remove this device from the list of trusted browsers'
